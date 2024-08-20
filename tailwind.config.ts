@@ -20,6 +20,10 @@ const config: Config = {
       height: {
         '500': '500px',
         '600': '600px',
+        '590': '590px',
+      },
+      borderColor: {
+        focus: '#000000',
       },
     },
   },

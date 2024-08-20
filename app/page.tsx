@@ -4,9 +4,9 @@ import Help_assistent from "./components/help_assistent";
 export default function Home() {
   return (
     <div>
-      <div className="absolute bottom-10 right-10">
+      <div className="absolute bottom-6 right-6">
         <Assistent/>
-        <Help_assistent/>
+        {/* <Help_assistent/> */}
       </div>
     </div>
   );
