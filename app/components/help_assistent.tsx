@@ -2,10 +2,37 @@
 import React, { useState, FormEvent } from 'react';
 
 const help_assistent = () => {
-    const [inputValue, setInputValue] = useState('');
-    const [attention, setAttention] = useState(false);
+
+    const [nameAttention, setNameAttention] = useState(false);
+    const [emailAttention, setEmailAttention] = useState(false);
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+    }
+
+    const handleNameAttention = (e: React.FocusEvent<HTMLInputElement>) => {
+        if (!e.target.value) {
+            setNameAttention(true);
+        } else {
+            setNameAttention(false);
+        }
+    }
+
+    const validateEmail = (email: string): boolean => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const handleEmailAttention = (e: React.FocusEvent<HTMLInputElement>) => {
+        if (!e.target.value) {
+            setEmailAttention(true);
+        } else {
+            const inputEmail = e.target.value;
+            if (!validateEmail(inputEmail)) {
+                setEmailAttention(true)
+            } else {
+                setEmailAttention(false)
+            }
+        }
     }
 
     return (
@@ -19,26 +46,42 @@ const help_assistent = () => {
                 </div>
             </div>
 
-            <div className=''>
-                <div className='flex justify-center'>
-                    <input className='w-80 h-14 text-base border-b pt-4'></input>
+            <div className='assistent_input'>
+                <div className='relative flex justify-center'>
+                    <input className='w-80 h-14 text-base border-b pt-5 pl-2 
+                    peer  focus:border-black' placeholder='' onBlur={handleNameAttention}
+                    />
                     <span className='absolute text-base mt-7 mr-64
-                        focus:text-orange-400
+                        peer-focus:text-orange-400 peer-focus:-translate-y-7
+                        peer-valid:-translate-y-7 peer-valid:text-orange-400
+                        transition-transform duration-200 peer-focus:text-sm
+
                     '>
                         Name*
                     </span>
                 </div>
-                <span className={`${attention ? 'block' : 'invisible'} text-red-400`}>
+                <span className={`${nameAttention ? 'block' : 'invisible'} text-red-400`}>
                     Please fill in this required field
                 </span>
             </div>
 
-
-            <div>
-                <input placeholder='E-mail*'></input>
-            </div>
-            <div>
-                attention
+            <div className='assistent_input'>
+                <div className='relative flex justify-center'>
+                    <input className='w-80 h-14 text-base border-b pt-5 pl-2 
+                    peer  focus:border-black' placeholder='' onBlur={handleEmailAttention}/>
+                    {/* <div>
+                        TODO: dont know thy border is not balck.
+                    </div> */}
+                    <span className='absolute text-base mt-7 mr-64
+                        peer-focus:text-orange-400 peer-focus:-translate-y-7
+                        peer-focus:text-sm transition-transform duration-200
+                    '>
+                        E-mail*
+                    </span>
+                </div>
+                <span className={`${emailAttention ? 'block' : 'invisible'} text-red-400`}>
+                    Please fill in this required field
+                </span>
             </div>
             <textarea placeholder='How can we help*'>
 
