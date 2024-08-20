@@ -5,8 +5,16 @@ const help_assistent = () => {
 
     const [nameAttention, setNameAttention] = useState(false);
     const [emailAttention, setEmailAttention] = useState(false);
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    // const [isInput, setIsInput] = useState('')
+
+    // const handleIsInput = (e: React.FocusEvent<HTMLInputElement>) => {
+    //     if (!e.target.value) {
+
+    //     }
+    // }
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
     }
 
     const handleNameAttention = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -49,18 +57,17 @@ const help_assistent = () => {
             <div className='assistent_input'>
                 <div className='relative flex justify-center'>
                     <input className='w-80 h-14 text-base border-b pt-5 pl-2 
-                    peer  focus:border-black' placeholder='' onBlur={handleNameAttention}
+                    peer  focus:border-black' placeholder='' onBlur={handleNameAttention} required
                     />
                     <span className='absolute text-base mt-7 mr-64
                         peer-focus:text-orange-400 peer-focus:-translate-y-7
-                        peer-valid:-translate-y-7 peer-valid:text-orange-400
-                        transition-transform duration-200 peer-focus:text-sm
-
+                        peer-valid:text-orange-400 peer-valid:-translate-y-7
+                        transition-transform duration-200 peer-focus:text-sm pointer-events-none
                     '>
                         Name*
                     </span>
                 </div>
-                <span className={`${nameAttention ? 'block' : 'invisible'} text-red-400`}>
+                <span className={`${nameAttention ? 'block' : 'invisible'} text-red-400 ml-8`}>
                     Please fill in this required field
                 </span>
             </div>
@@ -68,7 +75,7 @@ const help_assistent = () => {
             <div className='assistent_input'>
                 <div className='relative flex justify-center'>
                     <input className='w-80 h-14 text-base border-b pt-5 pl-2 
-                    peer  focus:border-black' placeholder='' onBlur={handleEmailAttention}/>
+                    peer  focus:border-black' placeholder='' onBlur={handleEmailAttention} />
                     {/* <div>
                         TODO: dont know thy border is not balck.
                     </div> */}
